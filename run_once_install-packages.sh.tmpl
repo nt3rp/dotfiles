@@ -1,0 +1,14 @@
+{{/* Only setup uncommon items; don't set up things like `npm`  */ -}}
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# WSL Specific Setup
+{{   end }}
+# General Linux Setup
+sudo npm install -g diff-so-fancy
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Mac Setup
+sudo npm install -g diff-so-fancy
+{{ end }}
+
