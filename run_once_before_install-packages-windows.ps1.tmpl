@@ -1,0 +1,65 @@
+{{- if eq .chezmoi.os "windows" }}
+# Heavily inspired by this:
+# https://github.com/TsekNet/dotfiles/blob/main/install.ps1
+
+# To run this script, two conditions need to be met:
+# 1. The script must be run in a terminal with administrative permissions
+# 2. Scripts must be executable: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {  Write-Host "This script must be run in a terminal that has Administrator privileges."
+  Write-Host 'Script must be run with Administrator privileges.'
+  Exit
+}
+
+if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
+  Write-Host 'Configuring Chocolatey...'
+
+  [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+  iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+  # Auto-confirm package installation
+  choco feature enable -n allowGlobalConfirmation -y
+
+  refreshenv
+}
+
+function Test-ChocolateyPackageInstalled {
+  [Parameter(Mandatory)]
+  [string]$Package
+
+  return Test-Path -Path "$env:ChocolateyInstall\lib\$Package"
+}
+
+# Define packages
+# `choco list -l -r --id-only` to see currently installed packages
+# TODO: Figure out how to sync this file and store in `chezmoi`.
+[String[]]$Packages = @(
+  '7zip'
+  'chocolatey'
+  'chocolatey-core.extension'
+  'chocolatey-misc-helpers.extension'
+  'chocolatey-windowsupdate.extension'
+  'discord'
+  'google-drive-file-stream'
+  'GoogleChrome'
+  'microsoft-windows-terminal'
+  'obsidian'
+  'retroarch'
+  'spotify'
+  'steam-client'
+  'vlc'
+  'vscode'
+  'wiztree'
+  'wsl2'
+)
+
+$MissingPackages = @()
+foreach ($package in $Packages) {
+  if (-not (Test-ChocolateyPackageInstalled($package))) {
+    $MissingPackages.Add($package)
+  }
+}
+
+if ($MissingPackages) {
+  & choco install $MissingPackages
+}
+{{- end }}
