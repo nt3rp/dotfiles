@@ -1,0 +1,7 @@
+{{- if (eq .chezmoi.os "windows") -}}
+# $UbuntuInstalled = wsl -l | Where {$_.Replace("`0","") -match '^Ubuntu'}
+
+# if (-not $UbuntuInstalled) {
+#  wsl --install -d Ubuntu
+# }
+{{end -}}
