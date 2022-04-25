@@ -1,0 +1,17 @@
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+" Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
+call plug#end()
+
+" VIM Settings
+syntax enable
+filetype plugin indent on
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized
