@@ -23,10 +23,12 @@ if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
 }
 
 function Test-ChocolateyPackageInstalled {
-  [Parameter(Mandatory)]
-  [string]$Package
+  param (
+    [Parameter(Mandatory)]
+    [string]$Package
+  )
 
-  return Test-Path -Path "$env:ChocolateyInstall\lib\$Package"
+  Test-Path -Path "$env:ChocolateyInstall\lib\$Package"
 }
 
 # Define packages
@@ -40,7 +42,7 @@ function Test-ChocolateyPackageInstalled {
   "chocolatey-windowsupdate.extension"
   "discord"
   "git"
-  "google-drive-file-stream"
+  "googledrive"
   "GoogleChrome"
   "microsoft-windows-terminal"
   "obsidian"
@@ -52,11 +54,11 @@ function Test-ChocolateyPackageInstalled {
 -}}
 
 {{ if .streaming -}}
-{{ $packages = concat $packages (list
+{{ $packaqges = concat $packages (list
   "obs-studio"
   "retroarch"
   "steam-client"
-  "stream-deck"
+  "streamdeck"
   "voicemeeter-potato") -}}
 {{ end -}}
 
@@ -66,7 +68,7 @@ function Test-ChocolateyPackageInstalled {
 {{ end -}}
 )
 
-$MissingPackages = @()
+$MissingPackages = [System.Collections.ArrayList]::new()
 foreach ($package in $Packages) {
   if (-not (Test-ChocolateyPackageInstalled($package))) {
     $MissingPackages.Add($package)
