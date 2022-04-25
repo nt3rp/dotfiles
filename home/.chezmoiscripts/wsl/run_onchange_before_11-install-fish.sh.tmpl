@@ -1,0 +1,26 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+# TODO: Check the actual OS instead of just "linux"
+# TODO: Create some sort of `sudo` helper?
+{{ $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" -}}
+{{ end -}}
+
+{{ $sudo }}add-apt-repository -y ppa:fish-shell/release-3
+{{ $sudo }}apt update
+{{ $sudo }}apt install -y fish
+
+FISH_INSTALL=$(which fish)
+
+# Add fish to the list of shells
+if ! grep -q "$FISH_INSTALL" /etc/shells; then
+  echo $FISH_INSTALL | {{ $sudo }}tee -a /etc/shells
+fi
+
+# Set fish as default shell
+if [ $SHELL != $FISH_INSTALL ]; then
+  echo "Changing default shell to fish"
+  chsh -s $FISH_INSTALL
+fi
+{{ end -}}

@@ -1,0 +1,18 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+# TODO: Check the actual OS instead of just "linux"
+{{ if lookPath "apt" }}
+{{ $packages := list
+  "curl"
+  "git"
+  "vim"
+-}}
+
+{{ $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" -}}
+{{ end -}}
+
+{{ $sudo }}apt install -y {{ $packages | join " " }}
+{{ end }}
+{{ end -}}

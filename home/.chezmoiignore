@@ -1,3 +1,6 @@
 {{- if ne .chezmoi.os "windows" -}}
-packages.config
+dot_config/
 {{- end }}
+
+# Manage this file via symlink
+fish_plugins

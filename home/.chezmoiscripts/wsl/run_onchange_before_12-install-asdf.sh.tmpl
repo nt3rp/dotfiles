@@ -1,0 +1,32 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+# TODO: Check the actual OS instead of just "linux"
+if [ ! -d ~/.asdf ]; then
+  echo "ASDF not installed; installing."
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+  mkdir -p ~/.config/fish/completions
+  ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
+fi
+
+# Reference: https://github.com/marcus-crane/dotfiles/blob/main/run_once_04_packages-asdf.sh.tmpl
+{{ $plugins := dict
+  "nodejs" "lts"
+}}
+
+{{ range sortAlpha (keys $plugins) -}}
+asdf plugin-add {{ . }}
+asdf install {{ . }} {{ get $plugins . }}
+asdf global {{ . }} {{ get $plugins . }}
+{{ end -}}
+
+# NPM
+{{ $npmPackages := list
+  "diff-so-fancy"
+}}
+
+[ ! -d ~/.npm-global ] && mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+{{ range sortAlpha $npmPackages -}}
+npm install -g {{ . }}
+{{ end -}}
+{{ end -}}
