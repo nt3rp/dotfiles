@@ -1,0 +1,6 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/usr/bin/fish
+if not type -q fisher
+  curl --silent --location https://git.io/fisher | source && fisher update
+end
+{{ end -}}
