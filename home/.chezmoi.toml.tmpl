@@ -1,0 +1,8 @@
+{{- $streaming := false -}}
+{{- if hasKey . "streaming" -}}
+{{-   $streaming = .streaming -}}
+{{- else -}}
+{{-   $streaming = promptBool "Is this a streaming PC" -}}
+{{- end -}}
+[data]
+  streaming = {{ $streaming }}

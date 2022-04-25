@@ -1,11 +1,11 @@
-{{- if eq .chezmoi.os "windows" }}
+{{- if (eq .chezmoi.os "windows") -}}
 # Heavily inspired by this:
 # https://github.com/TsekNet/dotfiles/blob/main/install.ps1
 
 # To run this script, two conditions need to be met:
 # 1. The script must be run in a terminal with administrative permissions
 # 2. Scripts must be executable: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {  Write-Host "This script must be run in a terminal that has Administrator privileges."
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
   Write-Host 'Script must be run with Administrator privileges.'
   Exit
 }
@@ -23,36 +23,52 @@ if (-not (Get-Command -Name choco -ErrorAction SilentlyContinue)) {
 }
 
 function Test-ChocolateyPackageInstalled {
-  [Parameter(Mandatory)]
-  [string]$Package
+  param (
+    [Parameter(Mandatory)]
+    [string]$Package
+  )
 
-  return Test-Path -Path "$env:ChocolateyInstall\lib\$Package"
+  Test-Path -Path "$env:ChocolateyInstall\lib\$Package"
 }
 
 # Define packages
 # `choco list -l -r --id-only` to see currently installed packages
 # TODO: Figure out how to sync this file and store in `chezmoi`.
+{{ $packages := list
+  "7zip"
+  "chocolatey"
+  "chocolatey-core.extension"
+  "chocolatey-misc-helpers.extension"
+  "chocolatey-windowsupdate.extension"
+  "discord"
+  "git"
+  "googledrive"
+  "GoogleChrome"
+  "microsoft-windows-terminal"
+  "obsidian"
+  "rescuetime"
+  "spotify"
+  "vlc"
+  "vscode"
+  "wiztree"
+-}}
+
+{{ if .streaming -}}
+{{ $packaqges = concat $packages (list
+  "obs-studio"
+  "retroarch"
+  "steam-client"
+  "streamdeck"
+  "voicemeeter-potato") -}}
+{{ end -}}
+
 [String[]]$Packages = @(
-  '7zip'
-  'chocolatey'
-  'chocolatey-core.extension'
-  'chocolatey-misc-helpers.extension'
-  'chocolatey-windowsupdate.extension'
-  'discord'
-  'google-drive-file-stream'
-  'GoogleChrome'
-  'microsoft-windows-terminal'
-  'obsidian'
-  'retroarch'
-  'spotify'
-  'steam-client'
-  'vlc'
-  'vscode'
-  'wiztree'
-  'wsl2'
+{{ range ($packages | sortAlpha | uniq) -}}
+  "{{ . }}"
+{{ end -}}
 )
 
-$MissingPackages = @()
+$MissingPackages = [System.Collections.ArrayList]::new()
 foreach ($package in $Packages) {
   if (-not (Test-ChocolateyPackageInstalled($package))) {
     $MissingPackages.Add($package)
@@ -62,4 +78,4 @@ foreach ($package in $Packages) {
 if ($MissingPackages) {
   & choco install $MissingPackages
 }
-{{- end }}
+{{ end -}}
