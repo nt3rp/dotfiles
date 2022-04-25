@@ -4,5 +4,19 @@
 {{- else -}}
 {{-   $streaming = promptBool "Is this a streaming PC" -}}
 {{- end -}}
+{{- $email := "" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptString "Email" -}}
+{{- end -}}
+{{- $name := "" -}}
+{{- if hasKey . "name" -}}
+{{-   $name = .name -}}
+{{- else -}}
+{{-   $name = promptString "Name" -}}
+{{- end -}}
 [data]
+  name = {{ $name | quote }}
+  email = {{ $email | quote }}
   streaming = {{ $streaming }}
