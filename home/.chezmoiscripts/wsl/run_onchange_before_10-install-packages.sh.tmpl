@@ -15,12 +15,4 @@
 
 {{ $sudo }}apt install -y {{ $packages | join " " }}
 {{ end }}
-
-# TODO: Consider pulling this into own script?
-# ASDF
-if [ ! -d "~/.asdf" ]; then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-  mkdir -p ~/.config/fish/completions
-  ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-fi
 {{ end -}}
