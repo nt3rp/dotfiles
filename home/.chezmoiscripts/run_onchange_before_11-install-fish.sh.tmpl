@@ -1,6 +1,5 @@
-{{- if (eq .chezmoi.os "linux") -}}
+{{- if eq .chezmoi.os "linux" "darwin" -}}
 #!/bin/bash
-# TODO: Check the actual OS instead of just "linux"
 # TODO: Create some sort of `sudo` helper?
 {{ $sudo := "sudo " -}}
 {{ if eq .chezmoi.username "root" -}}
