@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+{{ if lookPath "brew" }}
+echo "brew is already installed"
+{{ else }}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end }}
+{{ $packages := list
+  "google-chrome"
+-}}
+
+{{ $packages = concat $packages (list
+  "git"
+  "vim") -}}
+
+brew install {{ $packages | join " " }}
+{{ end -}}
