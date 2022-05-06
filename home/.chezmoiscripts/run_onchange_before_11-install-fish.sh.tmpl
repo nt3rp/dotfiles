@@ -6,9 +6,13 @@
 {{   $sudo = "" -}}
 {{ end -}}
 
+{{ if (and (lookPath "apt") (eq .chezmoi.os "linux")) }}
 {{ $sudo }}add-apt-repository -y ppa:fish-shell/release-3
 {{ $sudo }}apt update
 {{ $sudo }}apt install -y fish
+{{ else if lookPath "brew" }}
+brew install fish
+{{ end -}}
 
 FISH_INSTALL=$(which fish)
 

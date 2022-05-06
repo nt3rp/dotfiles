@@ -1,11 +1,20 @@
 {{- if eq .chezmoi.os "linux" "darwin" -}}
 #!/bin/bash
-if [ ! -d ~/.asdf ]; then
-  echo "ASDF not installed; installing."
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-  mkdir -p ~/.config/fish/completions
-  ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-fi
+ASDF_PATH=~/.asdf
+{{ if not (lookPath "asdf")}}
+echo "ASDF not installed; installing."
+git clone https://github.com/asdf-vm/asdf.git $ASDF_PATH --branch v0.10.0
+
+{{ if eq .chezmoi.os "darwin" }}
+echo ". $ASDF_PATH/asdf.sh" >> ~/.bash_profile
+echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bash_profile
+source ~/.bash_profile
+{{ end }}
+
+# Add fish shell auto-completions
+mkdir -p ~/.config/fish/completions
+ln -s $ASDF_PATH/completions/asdf.fish ~/.config/fish/completions
+{{ end -}}
 
 # Reference: https://github.com/marcus-crane/dotfiles/blob/main/run_once_04_packages-asdf.sh.tmpl
 {{ $plugins := dict
