@@ -54,7 +54,7 @@ function Test-ChocolateyPackageInstalled {
 -}}
 
 {{ if .streaming -}}
-{{ $packaqges = concat $packages (list
+{{ $packages = concat $packages (list
   "obs-studio"
   "retroarch"
   "steam-client"

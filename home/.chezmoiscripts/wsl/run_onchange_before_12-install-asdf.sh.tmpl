@@ -14,7 +14,7 @@ fi
 }}
 
 {{ range sortAlpha (keys $plugins) -}}
-asdf plugin-add {{ . }}
+asdf plugin add {{ . }}
 asdf install {{ . }} {{ get $plugins . }}
 asdf global {{ . }} {{ get $plugins . }}
 {{ end -}}
