@@ -1,0 +1,19 @@
+{{- if eq .chezmoi.os "linux" "darwin" -}}
+#!/bin/bash
+{{- $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" }}
+{{ end }}
+{{ if eq .osid "linux-debian" "linux-ubuntu" }}
+{{- $packages := list
+  "curl"
+  "git"
+  "vim"
+  "fish"
+-}}
+{{ $sudo }}add-apt-repository -y ppa:fish-shell/release-3
+{{ $sudo }}apt update
+{{ $sudo }}apt install -y {{ $packages | join " " }}
+{{ end -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{ end -}}
