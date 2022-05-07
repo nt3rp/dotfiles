@@ -1,12 +1,13 @@
-# Use different directory colours
-eval (dircolors -c ~/.dircolors/dircolors.ansi-dark)
-
 # Hide fish greeting
 set fish_greeting
 
 # Path
 fish_add_path ~/bin
 fish_add_path ~/.npm-global
+{{- if and (eq .chezmoi.os "darwin") -}}
+# Add `brew` to path
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ end -}}
 
 # Environment variables
 set -gx EDITOR vim
@@ -18,3 +19,6 @@ if test -e $ASDF_DIR
     mkdir -p ~/.config/fish/completions; and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
   end
 end
+
+# Use different directory colours
+eval (dircolors -c ~/.dircolors/dircolors.ansi-dark)
