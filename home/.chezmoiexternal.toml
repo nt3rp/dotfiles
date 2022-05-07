@@ -1,9 +1,3 @@
-[".asdf"]
-  type = "git-repo"
-  url = "https://github.com/asdf-vm/asdf.git"
-  refreshPeriod = "168h"
-  [".asdf".clone]
-    args = ["--branch", "v0.10.0"]
 [".dircolors/dircolors.256dark"]
   type = "file"
   url = "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark"
