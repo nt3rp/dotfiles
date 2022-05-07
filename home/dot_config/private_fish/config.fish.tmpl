@@ -4,9 +4,9 @@ set fish_greeting
 # Path
 fish_add_path ~/bin
 fish_add_path ~/.npm-global
-{{- if and (eq .chezmoi.os "darwin") -}}
+{{ if and (eq .chezmoi.os "darwin") -}}
 # Add `brew` to path
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval (/opt/homebrew/bin/brew shellenv)
 {{ end -}}
 
 # Environment variables
@@ -21,4 +21,8 @@ if test -e $ASDF_DIR
 end
 
 # Use different directory colours
-eval (dircolors -c ~/.dircolors/dircolors.ansi-dark)
+{{- $dircolors := "dircolors " -}}
+{{ if lookPath "gdircolors" -}}
+{{   $dircolors = "gdircolors " }}
+{{ end }}
+eval ({{ $dircolors }} -c ~/.dircolors/dircolors.ansi-dark)
