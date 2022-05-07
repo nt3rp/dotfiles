@@ -1,6 +1,9 @@
-{{- if ne .chezmoi.os "windows" -}}
+{{- if eq .chezmoi.os "windows" -}}
 dot_config/
-{{- end }}
+{{ end -}}
+{{ if ne .chezmoi.os "darwin" -}}
+.hushlogin
+{{ end -}}
 
 # Manage this file via symlink
 fish_plugins
