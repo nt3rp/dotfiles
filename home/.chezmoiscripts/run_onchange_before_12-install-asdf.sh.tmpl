@@ -1,24 +1,6 @@
 {{- if eq .chezmoi.os "linux" "darwin" -}}
 #!/bin/bash
-# Reference: https://github.com/marcus-crane/dotfiles/blob/main/run_once_04_packages-asdf.sh.tmpl
-{{ $plugins := dict
-  "nodejs" "lts"
--}}
-
-{{ range sortAlpha (keys $plugins) -}}
-asdf plugin add {{ . }}
-asdf install {{ . }} {{ get $plugins . }}
-asdf global {{ . }} {{ get $plugins . }}
-{{ end -}}
-
-# NPM
-{{ $npmPackages := list
-  "diff-so-fancy"
--}}
-
-mkdir -p ~/.npm-global
-npm config set prefix '~/.npm-global'
-{{ range sortAlpha $npmPackages -}}
-npm install -g {{ . }}
-{{ end -}}
+if [[ ! $(command -v asdf) ]]; then
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+fi
 {{ end -}}
