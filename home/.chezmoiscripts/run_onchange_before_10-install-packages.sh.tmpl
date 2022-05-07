@@ -16,4 +16,19 @@
 {{ $sudo }}apt install -y {{ $packages | join " " }}
 {{ end -}}
 {{- else if eq .chezmoi.os "darwin" -}}
+{{ if lookPath "brew" }}
+echo "brew is already installed"
+{{ else }}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end }}
+{{ $packages := list
+  "google-chrome"
+-}}
+
+{{ $packages = concat $packages (list
+  "fish"
+  "git"
+  "vim") -}}
+
+brew install {{ $packages | join " " }}
 {{ end -}}
