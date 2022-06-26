@@ -7,6 +7,7 @@
 {{ if eq .osid "linux-debian" "linux-ubuntu" }}
 {{- $packages := list
   "curl"
+  "direnv"
   "git"
   "vim"
   "fish"
@@ -23,13 +24,23 @@ echo "brew is already installed"
 {{ end }}
 {{ $packages := list
   "google-chrome"
+  "hyper"
+  "obsidian"
+  "rescuetime"
+  "spotify"
+  "visual-studio-code"
 -}}
 
+# Not sure if required:
+# tap "homebrew/bundle"
+# tap "homebrew/cask"
 {{ $packages = concat $packages (list
   "coreutils"
+  "direnv"
   "fish"
   "git"
-  "vim") -}}
+  "vim"
+  "mas") -}}
 
 brew install {{ $packages | join " " }}
 {{ end -}}

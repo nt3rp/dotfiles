@@ -26,3 +26,6 @@ end
 {{   $dircolors = "gdircolors " }}
 {{ end }}
 eval ({{ $dircolors }} -c ~/.dircolors/dircolors.ansi-dark)
+
+# Direnv
+direnv hook fish | source
