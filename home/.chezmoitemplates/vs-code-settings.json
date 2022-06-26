@@ -1,0 +1,13 @@
+{
+  "workbench.colorTheme": "Solarized Dark",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "ruby.useLanguageServer": true,
+  "ruby.intellisense": "rubyLocate",
+  "workbench.iconTheme": "material-icon-theme",
+  "gitlens.defaultDateStyle": "absolute",
+  "gitlens.defaultDateFormat": "YYYY-MM-DD HH:mm",
+  "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false
+}
