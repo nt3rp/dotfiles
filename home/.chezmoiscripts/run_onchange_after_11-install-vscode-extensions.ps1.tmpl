@@ -1,6 +1,8 @@
 {{- if eq .chezmoi.os "windows" -}}
 
 # TODO: Put this list in one place OR do install in one script.
+# To get the list of installed extensions, run the following:
+# https://stackoverflow.com/a/49398449/165988 
 {{ $extensions := list
   "eamodio.gitlens"
   "johnpapa.vscode-peacock"
@@ -11,7 +13,10 @@
   "ms-vscode-remote.remote-ssh-edit"
   "ms-vscode-remote.remote-wsl"
   "ms-vscode-remote.vscode-remote-extensionpack"
-  "PKief.material-icon-theme" -}}
+  "PKief.material-icon-theme"
+  "dbaeumer.vscode-eslint"
+  "esbenp.prettier-vscode"
+  "bierner.markdown-mermaid" -}}
 
 code --install-extension {{ $extensions | join " " }}
 {{ end -}}
