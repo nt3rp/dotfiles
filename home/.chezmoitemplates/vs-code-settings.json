@@ -9,5 +9,10 @@
   "gitlens.defaultDateFormat": "YYYY-MM-DD HH:mm",
   "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
   "editor.tabSize": 2,
-  "editor.detectIndentation": false
+  "editor.detectIndentation": false,
+  "prettier.requireConfig": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.lintTask.enable": true,
+  "workbench.editor.untitled.hint": "hidden"
 }
