@@ -18,5 +18,7 @@
   "esbenp.prettier-vscode"
   "bierner.markdown-mermaid" -}}
 
-code --install-extension {{ $extensions | join " " }}
+{{ range ($extensions | sortAlpha | uniq ) }}
+code --install-extension {{ . }}
+{{ end }}
 {{ end -}}
