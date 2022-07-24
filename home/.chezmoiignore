@@ -1,5 +1,6 @@
 {{- if eq .chezmoi.os "windows" -}}
 dot_config/
+dot_ssh/
 {{ end -}}
 {{ if ne .chezmoi.os "windows" -}}
 Code/
