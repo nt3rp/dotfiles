@@ -10,3 +10,11 @@
   type = "file"
   url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   refreshPeriod = "168h"
+["Fonts/JetBrains-Mono-Regular-Nerd-Font-Mono.ttf"]
+  type = "file"
+  url = "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
+  refreshPeriod = "168h"
+["Library/Fonts/JetBrains-Mono-Regular-Nerd-Font-Mono.ttf"]
+  type = "file"
+  url = "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
+  refreshPeriod = "168h"
