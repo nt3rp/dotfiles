@@ -10,5 +10,7 @@ AppData/
 Library/
 {{ end -}}
 
+Fonts/
+
 # Manage this file via symlink
 fish_plugins

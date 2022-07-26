@@ -1,0 +1,4 @@
+{{- if eq .chezmoi.os "windows" -}}
+$fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
+dir $HOME/Fonts/*.ttf | %{ $fonts.CopyHere($_.fullname) }
+{{ end -}}
