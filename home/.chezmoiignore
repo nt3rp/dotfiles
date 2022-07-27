@@ -10,7 +10,9 @@ AppData/
 Library/
 {{ end -}}
 
+# Ignored
 Fonts/
+vscode_extensions
 
-# Manage this file via symlink
+# Symlinks
 fish_plugins
