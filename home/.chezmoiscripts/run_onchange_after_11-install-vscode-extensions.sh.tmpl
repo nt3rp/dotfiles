@@ -1,6 +1,6 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-{{- $extensions := include ".config/vs-code-extensions.txt" -}}
+{{- $extensions := include "vscode_extensions" -}}
 # Extensions hash: {{ $extensions | sha256sum }}
 {{- range ($extensions | splitList "\n" | sortAlpha | compact | uniq ) }}
 code --install-extension {{ . }}
