@@ -1,1 +1,6 @@
 AddKeysToAgent yes
+
+Host github.com
+  IdentityFile ~/.ssh/{{ .chezmoi.hostname }}
+  User git
+

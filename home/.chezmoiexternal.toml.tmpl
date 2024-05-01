@@ -1,0 +1,24 @@
+{{ if ne .chezmoi.os "windows" -}}
+[".dircolors/dircolors.256dark"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark"
+  refreshPeriod = "168h"
+[".dircolors/dircolors.ansi-dark"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"
+  refreshPeriod = "168h"
+[".vim/autoload/plug.vim"]
+  type = "file"
+  url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  refreshPeriod = "168h"
+{{- end -}}
+
+{{- $fontRoot := "Fonts" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $fontRoot = "Library/Fonts" -}}
+{{- end -}}
+["{{ $fontRoot }}/JetBrains-Mono-Regular-Nerd-Font-Mono.ttf"]
+  type = "archive-file"
+  url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
+  path = "JetBrainsMonoNerdFontMono-Regular.ttf"
+  refreshPeriod = "168h"

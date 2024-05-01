@@ -1,0 +1,44 @@
+{{- if (eq .chezmoi.os "windows") -}}
+# TODO: Consider moving packages to JSON files.
+# Then you can decouple name from ID and specify versions as needed.
+# In general, this 'script' can be simpler if the data is separate.
+{{ $previousPackages := list
+  "antibodysoftware.wiztree"
+  "obsidian.obsidian"
+  "nickemanarin.screentogif"
+  "not.available.in.winget.lossless-cut"
+-}}
+
+{{ $gamingPackages := list
+  "libretro.retroarch"
+  "valve.steam"
+-}}
+
+{{ $streamingPackages := list
+  "elgato.streamdeck"
+  "obsproject.obsstudio"
+  "vb-audio.voicemeeter.potato"
+-}}
+
+{{ $packages := list
+  "7zip.7zip"
+  "discord.discord"
+  "git.git"
+  "github.cli"
+  "google.googledrive"
+  "microsoft.visualstudiocode"
+  "rescuetime.desktopapp"
+  "spotify.spotify"
+  "twpayne.chezmoi"
+  "videolan.vlc"
+  "vivaldi.vivaldi"
+  "wez.wezterm"
+-}}
+
+# Note: If winget encounters a packages that is already installed
+# it will try to upgrade it instead.
+{{ range ($packages | sortAlpha | uniq) -}}
+winget install {{ . }}
+{{ end -}}
+
+{{ end -}}

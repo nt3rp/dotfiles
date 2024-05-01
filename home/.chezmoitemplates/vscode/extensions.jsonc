@@ -1,0 +1,17 @@
+/**
+Note: While VSCode does have an extensions file, it isn't the same as *this* file.
+This is a list of extensions IDs that are currently installed.
+A new list can be obtained via the following command: `code --list-extensions`
+*/
+[
+    "casualjim.gotemplate",
+    "k--kato.intellij-idea-keybindings",
+    "mikestead.dotenv",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-ssh-edit",
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.vscode-remote-extensionpack",
+    "PKief.material-icon-theme",
+    "tamasfe.even-better-toml"
+]

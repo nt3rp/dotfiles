@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "windows" -}}
+# Ignore these files in Windows.
+.config/
+.vim/
+.hushlogin
+{{ else }}
+# Ignore these files in non-Windows environments.
+AppData/
+{{ end -}}
+
+{{ if ne .chezmoi.os "darwin" -}}
+# Ignore these files in non-Mac OS environments.
+Library/
+{{ end -}}
+
+# Ignore these files in any environment.
+Fonts/
