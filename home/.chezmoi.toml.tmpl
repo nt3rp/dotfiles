@@ -1,27 +1,20 @@
-{{- $streaming := false -}}
-{{- if hasKey . "streaming" -}}
-{{-   $streaming = .streaming -}}
-{{- else -}}
-{{-   $streaming = promptBool "Is this a streaming PC" -}}
-{{- end -}}
-{{- $email := "" -}}
-{{- if hasKey . "email" -}}
-{{-   $email = .email -}}
-{{- else -}}
-{{-   $email = promptString "Email" -}}
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 {{- $name := "" -}}
 {{- if hasKey . "name" -}}
 {{-   $name = .name -}}
 {{- else -}}
-{{-   $name = promptString "Name" -}}
+{{-   $name = promptString "What is the name associated with this account" -}}
 {{- end -}}
-{{- $osid := .chezmoi.os -}}
-{{- if hasKey .chezmoi.osRelease "id" -}}
-{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- $email := "" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptString "What is the email associated with this account" -}}
 {{- end -}}
 [data]
+  osid = {{ $osid | quote }}
   name = {{ $name | quote }}
   email = {{ $email | quote }}
-  streaming = {{ $streaming }}
-  osid = {{ $osid | quote }}

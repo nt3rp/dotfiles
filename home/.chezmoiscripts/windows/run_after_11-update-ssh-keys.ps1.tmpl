@@ -1,0 +1,32 @@
+{{- if eq .chezmoi.os "windows" -}}
+# TODO: Add caching trick with SHA checksum of file?
+# TODO: Do this same thing, but for linux
+
+$hostname = hostname
+$key_path = "$HOME\.ssh\$hostname"
+if (-not(Test-Path -Path $key_path)) {
+  echo "SSH keypair missing for $hostname; generating a new keypair."
+  ssh-keygen -t ed25519 -C {{ .email }} -f $key_path
+}
+
+# This may look like a lot, but it's mostly parsing the output
+# of the Github CLI and getting the list of matching scopes.
+$scopes = "admin:public_key", "admin:ssh_signing_key"
+$github_args = "--hostname", "github.com", "--scopes", $scopes
+$github_scopes = ((gh auth status)[-1] -split "Token scopes: ")[-1] -split ", " -replace "'|"
+$logged_in = $LastExitCode -eq 0
+$matching_scopes = Compare-Object $scopes $github_scopes -ExcludeDifferent -IncludeEqual -PassThru
+if ($logged_in -And (Compare-Object $matching_scopes $scopes)) {
+  gh auth refresh @github_args
+} elseif (-not $logged_in) {
+  gh auth login @github_args
+}
+
+$public_key = (Get-Content -Path "$key_path.pub").split(" ")[1]
+$matching_key = (gh ssh-key list).Where({ $_ -match $public_key })
+if (-not $matching_key) {
+  gh ssh-key add "$key_path.pub" --title "$hostname ({{ .chezmoi.os }})" --type "authentication"
+}
+
+# TODO: Add to SSH agent.
+{{- end -}}

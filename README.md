@@ -8,7 +8,10 @@ Install them with:
 chezmoi init nt3rp
 ```
 
-**Note:** To install dotfiles in Windows, there are few prerequisites.
+## Notes
 
-1. Scripts must be executable. For example, in Powershell: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-2. Powershell must be run as administrator
+If you are in Windows, there are a few things to consider:
+
+- The easiest way to install `chezmoi` is `winget install twpayne.chezmoi`
+- You _may_ need to make some scripts executable via `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
+- While care has been taken to avoid running as an administrator, you _may_ need to run Powershell as an admin because of how `chezmoi` handles Symlinks in Windows (citation needed)—among other reasons
