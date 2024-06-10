@@ -8,6 +8,13 @@ Install them with:
 chezmoi init nt3rp
 ```
 
+## TODO
+
+- Fix OS folder differences
+- Revisit old install scripts.
+- Generate SSH keys github CLI, etc. in darwin / linux
+- [SSH permissions](https://www.chezmoi.io/user-guide/frequently-asked-questions/troubleshooting/#chezmoi-makes-sshconfig-group-writeable-how-do-i-stop-this) 
+
 ## Notes
 
 If you are in Windows, there are a few things to consider:
