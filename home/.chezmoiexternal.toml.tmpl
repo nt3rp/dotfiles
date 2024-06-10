@@ -1,4 +1,4 @@
-{{ if ne .chezmoi.os "windows" -}}
+{{ if not .os.unixLike -}}
 [".dircolors/dircolors.256dark"]
   type = "file"
   url = "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark"
@@ -13,7 +13,7 @@
   refreshPeriod = "168h"
 {{ end }}
 
-{{ if not .wsl }}
+{{ if .os.hasGui }}
 {{- $fontRoot := "Fonts" -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $fontRoot = "Library/Fonts" -}}
