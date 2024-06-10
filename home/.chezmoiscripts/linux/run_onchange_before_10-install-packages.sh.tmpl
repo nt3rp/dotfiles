@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+{{- $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" }}
+{{ end }}
+{{ if eq .osid "linux-debian" "linux-ubuntu" }}
+{{- $packages := list
+  "curl"
+  "direnv"
+  "git"
+  "vim"
+-}}
+{{ $sudo }}apt update
+{{ $sudo }}apt install -y {{ $packages | join " " }}
+{{ end -}}
+{{ end -}}
