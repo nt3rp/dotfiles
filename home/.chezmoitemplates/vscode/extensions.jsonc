@@ -7,6 +7,7 @@ A new list can be obtained via the following command: `code --list-extensions`
     "casualjim.gotemplate",
     "k--kato.intellij-idea-keybindings",
     "mikestead.dotenv",
+    "ms-vscode.powershell",
     "ms-vscode-remote.remote-containers",
     "ms-vscode-remote.remote-ssh",
     "ms-vscode-remote.remote-ssh-edit",
