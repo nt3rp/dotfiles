@@ -10,6 +10,7 @@ chezmoi init nt3rp
 
 ## TODO
 
+- IF you can figure out if sudo is required via bash instead of
 - Fix OS folder differences
 - Revisit old install scripts.
 - Generate SSH keys github CLI, etc. in darwin / linux

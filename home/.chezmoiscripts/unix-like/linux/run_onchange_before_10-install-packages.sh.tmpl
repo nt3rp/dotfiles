@@ -1,15 +1,11 @@
 #!/bin/bash
-{{- $sudo := "sudo " -}}
-{{- if eq .chezmoi.username "root" -}}
-{{   $sudo = "" }}
-{{ end -}}
 {{ if eq .os.subtype "debian" "ubuntu" }}
-{{- $packages := list
+packages = (
   "curl"
   "direnv"
   "git"
   "vim"
--}}
-{{ $sudo }}apt update
-{{ $sudo }}apt install -y {{ $packages | join " " }}
+)
+sudo apt update
+sudo apt install -y ${packages[@]}
 {{ end -}}
