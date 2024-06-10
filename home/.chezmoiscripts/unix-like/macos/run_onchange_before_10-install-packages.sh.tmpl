@@ -1,31 +1,28 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 {{- $sudo := "sudo " -}}
 {{ if eq .chezmoi.username "root" -}}
 {{   $sudo = "" }}
-{{ end }}
-{{ if lookPath "brew" }}
+{{- end -}}
+{{ if lookPath "brew" -}}
 echo "brew is already installed"
 {{ else }}
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 {{ end }}
-{{ $packages := list
-  "google-chrome"
-  "rescuetime"
-  "spotify"
-  "visual-studio-code"
--}}
 
-# Not sure if required:
-# tap "homebrew/bundle"
-# tap "homebrew/cask"
-{{ $packages = concat $packages (list
+{{- $packages := list
   "coreutils"
   "direnv"
   "fish"
   "git"
   "vim"
-  "mas") -}}
-
+  "mas"
+-}}
+{{- if .os.hasGui -}}
+{{ $packages = concat $packages (list
+  "google-chrome"
+  "rescuetime"
+  "spotify"
+  "visual-studio-code"
+) -}}
+{{- end -}}
 brew install {{ $packages | join " " }}
-{{ end -}}
