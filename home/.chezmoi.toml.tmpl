@@ -14,7 +14,12 @@
 {{- else -}}
 {{-   $email = promptString "What is the email associated with this account" -}}
 {{- end -}}
+{{- $wsl := false -}}
+{{- if hasKey .chezmoi.kernel "osrelease" -}}
+{{-   $wsl = .chezmoi.kernel.osrelease | lower | contains "microsoft" -}}
+{{- end -}}
 [data]
   osid = {{ $osid | quote }}
   name = {{ $name | quote }}
   email = {{ $email | quote }}
+  wsl = {{ $wsl }}
