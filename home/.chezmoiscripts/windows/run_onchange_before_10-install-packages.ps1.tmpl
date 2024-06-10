@@ -1,4 +1,3 @@
-{{- if (eq .chezmoi.os "windows") -}}
 # TODO: Consider moving packages to JSON files.
 # Then you can decouple name from ID and specify versions as needed.
 # In general, this 'script' can be simpler if the data is separate.
@@ -39,6 +38,4 @@
 # it will try to upgrade it instead.
 {{ range ($packages | sortAlpha | uniq) -}}
 winget install {{ . }}
-{{ end -}}
-
 {{ end -}}

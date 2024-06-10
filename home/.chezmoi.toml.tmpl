@@ -1,20 +1,18 @@
-{{- $osid := .chezmoi.os -}}
+{{- $osType := .chezmoi.os -}}
+{{- $osSubType := "" -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
-{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{-   $osSubType = .chezmoi.osRelease.id -}}
 {{- end -}}
-{{- $name := "" -}}
-{{- if hasKey . "name" -}}
-{{-   $name = .name -}}
-{{- else -}}
-{{-   $name = promptString "What is the name associated with this account" -}}
-{{- end -}}
-{{- $email := "" -}}
-{{- if hasKey . "email" -}}
-{{-   $email = .email -}}
-{{- else -}}
-{{-   $email = promptString "What is the email associated with this account" -}}
-{{- end -}}
-[data]
-  osid = {{ $osid | quote }}
+{{- $hasGui := promptBoolOnce . "hasGui" "Does this environment have a GUI" -}}
+{{- $unixLike := eq .chezmoi.os "linux" "darwin" }}
+[data.os]
+  type = {{ $osType | quote }}
+  subtype = {{ $osSubType | quote }}
+  hasGui = {{ $hasGui }}
+  unixLike = {{ $unixLike }}
+
+{{ $name := promptStringOnce . "name" "What is the name associated with this account" -}}
+{{- $email := promptStringOnce . "email" "What is the email associated with this account" -}}
+[data.git]
   name = {{ $name | quote }}
   email = {{ $email | quote }}

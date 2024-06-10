@@ -1,0 +1,28 @@
+#!/bin/bash
+{{- $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" }}
+{{- end -}}
+{{ if lookPath "brew" -}}
+echo "brew is already installed"
+{{ else }}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end }}
+
+{{- $packages := list
+  "coreutils"
+  "direnv"
+  "fish"
+  "git"
+  "vim"
+  "mas"
+-}}
+{{- if .os.hasGui -}}
+{{ $packages = concat $packages (list
+  "google-chrome"
+  "rescuetime"
+  "spotify"
+  "visual-studio-code"
+) -}}
+{{- end -}}
+brew install {{ $packages | join " " }}
