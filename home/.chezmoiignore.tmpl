@@ -1,16 +1,25 @@
-{{- if eq .chezmoi.os "windows" -}}
-# Ignore these files in Windows.
-.config/
-.vim/
-.hushlogin
-{{ else }}
+{{- if ne .os.type "windows" -}}
 # Ignore these files in non-Windows environments.
+.chezmoiscripts/windows/*
 AppData/
 {{ end -}}
 
-{{ if ne .chezmoi.os "darwin" -}}
+{{- if ne .os.type "darwin" -}}
 # Ignore these files in non-Mac OS environments.
 Library/
+{{ end -}}
+
+{{- if not .os.unixLike -}}
+# Ignore these files in non-Unix-like environments.
+.chezmoiscripts/unix-like/**/*
+.config/
+.vim/
+.hushlogin
+{{ end -}}
+
+{{- if not .os.hasGui -}}
+# Ignore these files in non-GUI environments.
+.wezterm.lua
 {{ end -}}
 
 # Ignore these files in any environment.

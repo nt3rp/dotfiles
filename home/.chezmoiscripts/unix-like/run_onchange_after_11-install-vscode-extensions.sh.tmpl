@@ -1,5 +1,5 @@
-{{- if eq .chezmoi.os "darwin" "linux" -}}
 #!/bin/bash
+{{ if .os.hasGui }}
 {{- $extensions := include ".chezmoitemplates/vscode/extensions.jsonc" -}}
 # This line is required so that this script is only run when the
 # list of extensions changes.

@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "windows" -}}
 {{- $extensions := include ".chezmoitemplates/vscode/extensions.jsonc" -}}
 # This line is required so that this script is only run when the
 # list of extensions changes.
@@ -6,4 +5,3 @@
 {{- range ($extensions | fromJsonc | uniq ) }}
 code --install-extension {{ . }}
 {{- end -}}
-{{ end -}}

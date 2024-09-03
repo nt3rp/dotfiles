@@ -1,0 +1,11 @@
+#!/bin/bash
+{{ if eq .os.subtype "debian" "ubuntu" }}
+packages = (
+  "curl"
+  "direnv"
+  "git"
+  "vim"
+)
+sudo apt update
+sudo apt install -y ${packages[@]}
+{{ end -}}

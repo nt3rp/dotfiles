@@ -1,4 +1,4 @@
-{{ if ne .chezmoi.os "windows" -}}
+{{ if not .os.unixLike -}}
 [".dircolors/dircolors.256dark"]
   type = "file"
   url = "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark"
@@ -11,8 +11,9 @@
   type = "file"
   url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
   refreshPeriod = "168h"
-{{- end -}}
+{{ end }}
 
+{{ if .os.hasGui }}
 {{- $fontRoot := "Fonts" -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $fontRoot = "Library/Fonts" -}}
@@ -22,3 +23,4 @@
   url = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
   path = "JetBrainsMonoNerdFontMono-Regular.ttf"
   refreshPeriod = "168h"
+{{ end }}
