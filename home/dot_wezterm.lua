@@ -12,5 +12,19 @@ config.enable_scroll_bar = true
 
 -- Shell + Launcher Options
 config.default_domain = 'WSL:Ubuntu'
+config.skip_close_confirmation_for_processes_named = {
+    'bash',
+    'sh',
+    'zsh',
+    'fish',
+    'tmux',
+    'nu',
+    'cmd.exe',
+    'conhost.exe',
+    'pwsh.exe',
+    'powershell.exe',
+    'wsl.exe',
+    'wslhost.exe'
+  }
 
 return config
