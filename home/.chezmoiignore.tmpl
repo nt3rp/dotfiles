@@ -7,6 +7,7 @@ AppData/
 {{- if ne .os.type "darwin" -}}
 # Ignore these files in non-Mac OS environments.
 Library/
+.chezmoiscripts/unix-like/macos/*
 {{ end -}}
 
 {{- if not .os.unixLike -}}
