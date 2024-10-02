@@ -1,4 +1,5 @@
 #!/bin/bash
+{{ if eq .os.type "darwin" }}
 {{- $sudo := "sudo " -}}
 {{ if eq .chezmoi.username "root" -}}
 {{   $sudo = "" }}
@@ -26,3 +27,4 @@ echo "brew is already installed"
 ) -}}
 {{- end -}}
 brew install {{ $packages | join " " }}
+{{ end -}}
