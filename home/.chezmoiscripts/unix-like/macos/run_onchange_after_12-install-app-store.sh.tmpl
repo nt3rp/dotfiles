@@ -1,5 +1,5 @@
 #!/bin/bash
-{{ if eq .os "darwin" }}
-packages = ("Magnet")
+{{ if eq .os.type "darwin" }}
+packages=("Magnet")
 mas install ${packages[@]}
 {{ end -}}
