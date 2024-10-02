@@ -6,13 +6,17 @@ AppData/
 
 {{- if ne .os.type "darwin" -}}
 # Ignore these files in non-Mac OS environments.
+.chezmoiscripts/darwin/*
 Library/
-.chezmoiscripts/unix-like/darwin/*
+{{ end -}}
+
+{{- if ne .os.type "linux" -}}
+# Ignore these files in Linux environments.
+.chezmoiscripts/linux/*
 {{ end -}}
 
 {{- if not .os.unixLike -}}
 # Ignore these files in non-Unix-like environments.
-.chezmoiscripts/unix-like/**/*
 .config/
 .vim/
 .hushlogin
