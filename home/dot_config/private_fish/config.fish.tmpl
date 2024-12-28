@@ -3,7 +3,6 @@ set fish_greeting
 
 # Path
 fish_add_path ~/bin
-fish_add_path ~/.npm-global
 {{ if and (eq .chezmoi.os "darwin") -}}
 # Add `brew` to path
 eval (/opt/homebrew/bin/brew shellenv)
@@ -12,14 +11,7 @@ eval (/opt/homebrew/bin/brew shellenv)
 # Environment variables
 set -gx EDITOR vim
 
-set -x ASDF_DIR ~/.asdf
-if test -e $ASDF_DIR
-  source $ASDF_DIR/asdf.fish
-  if not test -e $HOME/.config/fish/completions
-    mkdir -p ~/.config/fish/completions; and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-  end
-end
-
+# TODO: Fix this.
 # Use different directory colours
 {{- $dircolors := "dircolors " -}}
 {{ if lookPath "gdircolors" -}}
@@ -27,5 +19,10 @@ end
 {{ end }}
 eval ({{ $dircolors }} -c ~/.dircolors/dircolors.ansi-dark)
 
-# Direnv
-direnv hook fish | source
+# Activate mise
+fish_add_path ~/.local/bin/
+if status is-interactive
+  mise activate fish | source
+else
+  mise activate fish --shims | source
+end
