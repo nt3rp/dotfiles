@@ -8,7 +8,7 @@ This is a list of things you want to try out before upgrading to Windows 11 or r
 - [ ] Programs to add / install
   - [ ] Loop Midi (or alternative for changing 'instrument' in VST host)
   - [ ] Element (or alternative VST host)
-  - [ ] Stream Deck
+  - [ ] Stream Deck - Plugins??
   - [ ] `mise` (in lieu of `asdf`)
   - [ ] GDrive
   - [ ] Capture card
@@ -23,6 +23,7 @@ This is a list of things you want to try out before upgrading to Windows 11 or r
     - [ ] Plugins?
 - [ ] ACTUAL BACKUPS
   - In current setup ... what actually needs to be backed up?
+  - MAYBE just backup GDrive?
 - [ ] VSTs?
 - [ ] Retroarch
 - [ ] ASIO -  realtime monitoring of behringer
