@@ -1,9 +1,9 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
-{{ $masPackages := list
-  "Magnet"
+{{ $masPackages := dict
+  "Magnet" "441258766"
 -}}
 
-mas install {{ $masPackages | join " " }}
+mas install {{ values $masPackages | join " " }}
 {{ end -}}

@@ -1,10 +1,12 @@
 {{- if eq .chezmoi.os "linux" "darwin" -}}
 #!/bin/bash
+# *nix-based OS
 {{- $sudo := "sudo " -}}
 {{ if eq .chezmoi.username "root" -}}
 {{   $sudo = "" }}
 {{ end }}
 {{ if eq .osid "linux-debian" "linux-ubuntu" }}
+# APT-based OS
 {{- $packages := list
   "curl"
   "direnv"
@@ -15,17 +17,16 @@
 {{ $sudo }}add-apt-repository -y ppa:fish-shell/release-3
 {{ $sudo }}apt update
 {{ $sudo }}apt install -y {{ $packages | join " " }}
-{{ end -}}
 {{- else if eq .chezmoi.os "darwin" -}}
+# MacOS
 {{ if lookPath "brew" }}
 echo "brew is already installed"
 {{ else }}
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 {{ end }}
+# TODO: Ask about certain package installations; work, for example, might install Chrome.
+# Temporarily removed: hyper, obsidian, google-chrome
 {{ $packages := list
-  "google-chrome"
-  "hyper"
-  "obsidian"
   "rescuetime"
   "spotify"
   "visual-studio-code"
@@ -43,4 +44,5 @@ echo "brew is already installed"
   "mas") -}}
 
 brew install {{ $packages | join " " }}
+{{ end -}}
 {{ end -}}
