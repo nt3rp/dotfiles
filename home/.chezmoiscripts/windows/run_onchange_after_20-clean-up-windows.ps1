@@ -13,7 +13,10 @@ function Create-Registry-Key {
         New-Item -Path $Path -Force
     }
 
-    Set-ItemProperty -Path $Path -Name $Key -Value $Value -Force
+    # If a key is provided, set the property
+    if ($Key) {
+        Set-ItemProperty -Path $Path -Name $Key -Value $Value -Force
+    }
 }
 
 # Disable and remove Cortana
@@ -31,3 +34,6 @@ Get-AppxProvisionedPackage -Online | where-object {$_.PackageName -like "*Copilo
 
 # Disable and remove Recall
 Disable-WindowsOptionalFeature -Online -FeatureName "Recall"
+
+# Revert Windows 11 right-click menu to full menu
+Create-Registry-Key 'HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32'
