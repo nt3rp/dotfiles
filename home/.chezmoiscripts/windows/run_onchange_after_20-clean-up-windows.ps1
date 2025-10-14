@@ -13,7 +13,7 @@ function Create-Registry-Key {
         New-Item -Path $Path -Force
     }
 
-    Set-ItemProperty -Path $Path -Name AllowCortana -Value $Value -Force
+    Set-ItemProperty -Path $Path -Name $Key -Value $Value -Force
 }
 
 # Disable and remove Cortana
