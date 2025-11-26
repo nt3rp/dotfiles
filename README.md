@@ -2,7 +2,7 @@
 
 nt3rp's dotfiles, managed with [`chezmoi`](https://github.com/twpayne/chezmoi)
 
-Install them with:
+Install them with (banana):
 
 ```
 chezmoi init nt3rp
